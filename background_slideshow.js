@@ -25,8 +25,8 @@
 		.fill(0)
 		.map((_, i) => i);
 		for (let i = 2; i <= Math.sqrt(max + 1); i++) {
-	    	for (let j = i ** 2; j < max + 1; j += i) delete result[j];
-		}
+	    for (let j = i ** 2; j < max + 1; j += i) delete result[j];
+	}
 		return Object.values(result.slice(Math.max(min, 2)));
 	};
 
@@ -42,13 +42,14 @@
 	// let's show all the images in random order
 	seed= getRandPrime(1, 100000);
 
+
 	// find max existing file number
 	function checkNumber(n, callback) {
 		var http = new XMLHttpRequest();
 		http.open('HEAD', path + n + ".jpg");
 		http.onreadystatechange = function() {
 			if (this.readyState == this.DONE) {
-			callback(this.status != 404);
+				callback(this.status != 404);
 			}
 		}
 		http.send();
@@ -113,6 +114,7 @@
 					.shadowRoot.querySelector("#view")
 	}
 
+
 	let current
 
 	function bs_update() {
@@ -160,7 +162,6 @@
 				bs_register_tap() // now because of slow hw
 				debug("Update event")
 				bs_update()	  
-
 			bs_schedule(updateInterval*1000)
 		}, interval)
 		debug("Scheduling next update in "+ interval/1000 + " seconds")
