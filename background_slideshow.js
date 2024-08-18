@@ -109,8 +109,8 @@
 	// this might break on a Lovelace update. 
 	function bs_getBackgroundElement() {
 		return document.querySelector("body > home-assistant").shadowRoot.querySelector("home-assistant-main").shadowRoot
-					.querySelector("app-drawer-layout > partial-panel-resolver > ha-panel-lovelace").shadowRoot.querySelector("hui-root")
-					.shadowRoot.querySelector("#layout")
+					.querySelector("ha-drawer > partial-panel-resolver > ha-panel-lovelace").shadowRoot.querySelector("hui-root")
+					.shadowRoot.querySelector("#view")
 	}
 
 	let current
