@@ -21,13 +21,13 @@
 
 	// AKA Sieve of Eratosthenes
 	const getPrimes = (min, max) => {
-	  const result = Array(max + 1)
-	    .fill(0)
-	    .map((_, i) => i);
-	  for (let i = 2; i <= Math.sqrt(max + 1); i++) {
-	    for (let j = i ** 2; j < max + 1; j += i) delete result[j];
-	  }
-	  return Object.values(result.slice(Math.max(min, 2)));
+		const result = Array(max + 1)
+		.fill(0)
+		.map((_, i) => i);
+		for (let i = 2; i <= Math.sqrt(max + 1); i++) {
+	    	for (let j = i ** 2; j < max + 1; j += i) delete result[j];
+		}
+		return Object.values(result.slice(Math.max(min, 2)));
 	};
 
 	const getRandNum = (min, max) => {
@@ -35,24 +35,23 @@
 	};
 
 	const getRandPrime = (min, max) => {
-	  const primes = getPrimes(min, max);
-	  return primes[getRandNum(0, primes.length - 1)];
+		const primes = getPrimes(min, max);
+		return primes[getRandNum(0, primes.length - 1)];
 	};
 
 	// let's show all the images in random order
 	seed= getRandPrime(1, 100000);
 
- 
 	// find max existing file number
 	function checkNumber(n, callback) {
-	    var http = new XMLHttpRequest();
-	    http.open('HEAD', path + n + ".jpg");
-	    http.onreadystatechange = function() {
-	        if (this.readyState == this.DONE) {
-	            callback(this.status != 404);
-	        }
-	    }
-	    http.send();
+		var http = new XMLHttpRequest();
+		http.open('HEAD', path + n + ".jpg");
+		http.onreadystatechange = function() {
+			if (this.readyState == this.DONE) {
+			callback(this.status != 404);
+			}
+		}
+		http.send();
 	}
 
 	let upward= true;
@@ -60,33 +59,32 @@
 	function recur(n, interval) {
 		checkNumber(n, function (exists) {
 
-   			debug ("interval: "+interval+"   n: "+ n+ (exists? " exists": " not found"))
+			debug ("interval: "+interval+"   n: "+ n+ (exists? " exists": " not found"))
 
-   			upward= upward && exists
-   			if (upward)
-   				interval*= 2   			
-   			else 
-   				interval/= 2
+			upward= upward && exists
+			if (upward)
+				interval*= 2   			
+			else 
+				interval/= 2
 
-   			if (exists) {
-   				if (interval>=1)
-   					recur(n+interval, interval)
-   				else {
-   					
-   					imagesCount= n+1
+			if (exists) {
+				if (interval>=1)
+					recur(n+interval, interval)
+				else {
+					imagesCount= n+1
 					info(imagesCount+ " pics available")
 					current= Math.floor(Math.random() *imagesCount)
-   				}
-   			}
-   			else {
-   				if (interval >= 1)
-   					recur(n-interval, interval)
-   				else {
-   					imagesCount= n
+				}
+			}
+			else {
+				if (interval >= 1)
+					recur(n-interval, interval)
+				else {
+					imagesCount= n
 					info(imagesCount+ " pics available")
 					current= Math.floor(Math.random() *imagesCount)
-   				}
-   			}
+				}
+			}
 		})
 	}
 
@@ -104,7 +102,6 @@
 
 			bs_schedule(5000) // first update
 		})
- 
 	function bs_setBackgroundImage(url) {
 		bs_getBackgroundElement().setAttribute("style",'--lovelace-background:center / cover no-repeat fixed url("'+ url + '");')
 	}
@@ -130,7 +127,6 @@
 			else {
 				url= "https://picsum.photos/1920/1080/?blur=1&tstamp="+Date.now()
 			}
-			 
 			bs_setBackgroundImage(url)
 			info("Updated background to "+url)
 		}
@@ -165,7 +161,7 @@
 				debug("Update event")
 				bs_update()	  
 
-		  bs_schedule(updateInterval*1000)
+			bs_schedule(updateInterval*1000)
 		}, interval)
 		debug("Scheduling next update in "+ interval/1000 + " seconds")
 	}
